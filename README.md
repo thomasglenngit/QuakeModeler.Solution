@@ -32,7 +32,7 @@ output: - Total earthquakes in X time.
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Open via Bash/GitBash:
 
 1. Clone this repository onto your computer:
-    "git clone https://github.com/Lackeyt/QuakeModler.Solution"
+    "git clone https://github.com/fetonecontrol/QuakeModler.Solution"
 2. Navigate into the "QuakeModler.Solution" directory in Visual Studio Code or preferred text editor:
 3. Open the project by typing "code ." while in the previous directory in your terminal.
 4. Open your computer's terminal and navigate to the directory bearing the name of the program and containing the top level subdirectories and files.
