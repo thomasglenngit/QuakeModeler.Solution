@@ -8,15 +8,17 @@ namespace QuakeModeler.Models
   {
     public string Lat { get; set; }
     public string Lng { get; set; }
-    public static string[] LatLng(string apiKey, string placeName)
+    public static void GetLatLng(string apiKey, string placeName)
     {
-      var apiCallTask = ApiHelper.ApiCall(apiKey, placeName);
+      System.Console.WriteLine("hello");
+      var apiCallTask = ApiHelper.ApiCall(EnvironmentVariables.ApiKey, "Seattle");
       var result = apiCallTask.Result;
 
-      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
-      LatLng latLng = JsonConvert.DeserializeObject<LatLng>(jsonResponse["results"].ToString());
-
-      return latLng;
+      //JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      //JObject latLng = JsonConvert.DeserializeObject<JObject>(jsonResponse["results"][0]["geometry"].ToString());
+      //System.Console.WriteLine(latLng);
+      //return latLng;
+      System.Console.WriteLine("hello");
     }
   }
 }
