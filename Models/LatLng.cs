@@ -8,7 +8,7 @@ namespace QuakeModeler.Models
   {
     public static string[] GetLatLng(string apiKey, string placeName)
     {      
-      var apiCallTask = ApiHelper.ApiCall("ff7663b329b240729be1c4bfe4f03fa9", "Seattle");
+      var apiCallTask = ApiHelper.ApiCall(EnvironmentVariables.ApiKey, placeName);
       var result = apiCallTask.Result;
 
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
