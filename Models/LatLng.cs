@@ -10,6 +10,10 @@ namespace QuakeModeler.Models
     public string UserLng { get; set; }
     public string PlaceName {get;set;}
 
+    public LatLng()
+    {
+          
+    }
     public LatLng(string placeName, string lat, string lng)
     {
       PlaceName = placeName;

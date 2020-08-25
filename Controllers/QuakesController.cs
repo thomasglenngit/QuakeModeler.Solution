@@ -13,14 +13,21 @@ namespace QuakeModeler.Controllers
         {
           return View();
         }
+
+        [HttpPost]
+        public ActionResult Index(string placeName)
+        {
+          LatLng latLng = LatLng.GetLatLng(placeName);
+          return RedirectToAction("Details", latLng);
+        }
         //model = result of an api call
         //all earthquakes for a given area
-        public IActionResult ReturnAll(string placeName)
+        
+        public IActionResult Details(LatLng latLng)
         {
-
-          LatLng latLng = LatLng.GetLatLng(placeName); 
           var allQuakes = Quake.GetQuakes(latLng.UserLat, latLng.UserLng);
           ViewBag.UserData = latLng;
+          
           // //Find Mode
           // int mode = allQuakes.Properties.Magnitude.GroupBy(magnitude => magnitude)
           //   .OrderByDescending(magnitude => magnitude.Count())
@@ -45,6 +52,26 @@ namespace QuakeModeler.Controllers
           return View(allQuakes);
         }
 
+        //public int PossibilityOfQuake(List<Quake> quakes)
+        // average number of quakes in a month based on ten years : quakes.Count / 120
+        //
+        // {
+        //     if(quakes.Count == 0)
+        //     {
+        //       return 0;
+        //     }
+        //     else
+        //     {
+        //       int possibility = 120 / quakes.Count;              
+        //     }
+        //     return possibility;
+        // }
+
+        // public int StrengthOfQuake(List<Quake> quakes) // average number of quakes/year will be: quakes.Count / 10
+        // {
+        //     var 
+        // }
+      
     }
 }
 
