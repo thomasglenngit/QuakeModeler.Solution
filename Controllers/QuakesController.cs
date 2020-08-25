@@ -20,21 +20,25 @@ namespace QuakeModeler.Controllers
 
           string[] latLng = LatLng.GetLatLng(apiKey, placeName); 
           var allQuakes = Quake.GetQuakes(latLng[0], latLng[1], maxRadiusKm, startTime, endTime);
-          
+          //Find Mode
           int mode = allQuakes.Properties.Magnitude.GroupBy(magnitude => magnitude)
             .OrderByDescending(magnitude => magnitude.Count())
             .First()
             .Key;
+          //Find Frequency
+          int frequency = allQuakes.Count() / (endTime - startTime);
+          
+          int largest = allQuakes.Max();
+
           int average = 0;
-          int largest = 0;
-          int frequency = 0;
           int[] statsArray = {average, mode, largest, frequency}; 
 
-          for (int i = 0; i < allQuakes.Count; i++)
+          //Find Average
+
+          for (int i = 0; i < allQuakes.Count(); i++)
           {
             allQuakes[i].Properties.Magnitude += average;
-            average /= allQuakes.Count;
-
+            average /= allQuakes.Count();
           }
 
           return View(allQuakes);
