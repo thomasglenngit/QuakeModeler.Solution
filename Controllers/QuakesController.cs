@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using QuakeModeler.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
+using System;
+using System.Globalization;
 
 namespace QuakeModeler.Controllers
 {
@@ -13,14 +15,21 @@ namespace QuakeModeler.Controllers
         {
           return View();
         }
+
+        [HttpPost]
+        public IActionResult Index(string placeName)
+        {
+          LatLng latLng = LatLng.GetLatLng(placeName);
+          return RedirectToAction("Details", latLng);
+        }
         //model = result of an api call
         //all earthquakes for a given area
-        public IActionResult ReturnAll(string placeName)
+        
+        public IActionResult Details(LatLng latLng)
         {
-
-          LatLng latLng = LatLng.GetLatLng(placeName); 
           var allQuakes = Quake.GetQuakes(latLng.UserLat, latLng.UserLng);
           ViewBag.UserData = latLng;
+          
           // //Find Mode
           // int mode = allQuakes.Properties.Magnitude.GroupBy(magnitude => magnitude)
           //   .OrderByDescending(magnitude => magnitude.Count())
@@ -45,6 +54,47 @@ namespace QuakeModeler.Controllers
           return View(allQuakes);
         }
 
+        public double PossibilityOfQuake(List<Quake> quakes)
+
+        //average number of quakes in a month based on ten years : quakes.Count / 120
+        // 1 / (quakes.Count/120) * 100 = 100 / (quakes.Count/120)
+        // possibility to have earthquake in a month: number of EQ in month / 30 * 100
+
+        // earthquakes per month (x) = 10
+        // Quakes.Count = 1200
+
+        // 1/(1200/120)*100 = 20
+        // 12000/1200 = 20
+
+        {
+            if(quakes.Count == 0)
+            {
+              return (double)0;
+            }
+            else
+            {
+              double possibility = quakes.Count * 10 / 365;      //average earthquakes per day          
+            }
+            return possibility;
+        }
+
+
+
+        public double StrengthOfQuake(List<Quake> quakes) // average number of quakes/year will be: quakes.Count / 10
+        {
+            if(quakes.Count == 0)
+            {
+              return (double)0;
+            }
+            double sum = 0;
+           
+            foreach (var item in quakes)
+            {
+                sum += Convert.ToDouble(quakes.Magnitude);
+            }
+            return sum / quakes.Count;
+        }
+      
     }
 }
 

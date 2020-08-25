@@ -10,10 +10,15 @@ namespace QuakeModeler.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        [HttpGet("/")] 
+        public ActionResult Index()
         {
-            return View();
+        return View();
         }
+        // public IActionResult Index()
+        // {
+        //     return View();
+        // }
 
         public IActionResult Privacy()
         {
