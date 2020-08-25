@@ -20,6 +20,7 @@ namespace QuakeModeler.Controllers
 
           LatLng latLng = LatLng.GetLatLng(placeName); 
           var allQuakes = Quake.GetQuakes(latLng.UserLat, latLng.UserLng);
+          ViewBag.UserData = latLng;
           // //Find Mode
           // int mode = allQuakes.Properties.Magnitude.GroupBy(magnitude => magnitude)
           //   .OrderByDescending(magnitude => magnitude.Count())
