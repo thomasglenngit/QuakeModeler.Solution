@@ -10,14 +10,19 @@ namespace QuakeModeler.Models
     public string UserLng { get; set; }
     public string PlaceName {get;set;}
 
-    public LatLng(string placeName, string[] latLng)
+    public LatLng(string placeName, string lat, string lng)
     {
       PlaceName = placeName;
-      UserLat = latLng[0];
-      UserLng = latLng[1];
+      UserLat = lat;
+      UserLng = lng;
     }
+//1. Set user location: string[] location = LatLng.GetLatLng(userInputPlaceName)
+//                      string userLat = location[0];
+//                      string userLng = location[1];
 
-    public static string[] GetLatLng(string placeName)
+// LatLng userData = GetLatLng(userPlaceName)
+// getQuakes(userData.UserLat, userData.UserLng)
+    public static LatLng GetLatLng(string placeName)
     {      
       var apiCallTask = ApiHelper.ApiCallLatLng(placeName);
       var result = apiCallTask.Result;
@@ -26,10 +31,11 @@ namespace QuakeModeler.Models
       string lat = JsonConvert.DeserializeObject<string>(jsonResponse["results"][0]["geometry"]["lat"].ToString());
       string lng = JsonConvert.DeserializeObject<string>(jsonResponse["results"][0]["geometry"]["lng"].ToString());
 
-      string[] latLng = new string[2];
-      latLng[0] = lat;
-      latLng[1] = lng;
-      return latLng;
+      // string[] latLng = new string[2];
+      // latLng[0] = lat;
+      // latLng[1] = lng;
+      LatLng userObject = new LatLng(placeName, lat, lng);
+      return userObject;
     }
   }
 }
