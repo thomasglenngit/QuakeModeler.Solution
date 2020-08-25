@@ -15,31 +15,32 @@ namespace QuakeModeler.Controllers
         }
         //model = result of an api call
         //all earthquakes for a given area
-        public IActionResult ReturnAll(string apiKey, string placeName, int maxRadiusKm, int startTime, int endTime)
+        public IActionResult ReturnAll(string placeName)
         {
 
-          string[] latLng = LatLng.GetLatLng(apiKey, placeName); 
-          var allQuakes = Quake.GetQuakes(latLng[0], latLng[1], maxRadiusKm, startTime, endTime);
-          //Find Mode
-          int mode = allQuakes.Properties.Magnitude.GroupBy(magnitude => magnitude)
-            .OrderByDescending(magnitude => magnitude.Count())
-            .First()
-            .Key;
-          //Find Frequency
-          int frequency = allQuakes.Count() / (endTime - startTime);
+          LatLng latLng = LatLng.GetLatLng(placeName); 
+          var allQuakes = Quake.GetQuakes(latLng.UserLat, latLng.UserLng);
+          ViewBag.UserData = latLng;
+          // //Find Mode
+          // int mode = allQuakes.Properties.Magnitude.GroupBy(magnitude => magnitude)
+          //   .OrderByDescending(magnitude => magnitude.Count())
+          //   .First()
+          //   .Key;
+          // //Find Frequency
+          // int frequency = allQuakes.Count() / (endTime - startTime);
           
-          int largest = allQuakes.Max();
+          // int largest = allQuakes.Max();
 
-          int average = 0;
-          int[] statsArray = {average, mode, largest, frequency}; 
+          // int average = 0;
+          // int[] statsArray = {average, mode, largest, frequency}; 
 
-          //Find Average
+          // //Find Average
 
-          for (int i = 0; i < allQuakes.Count(); i++)
-          {
-            allQuakes[i].Properties.Magnitude += average;
-            average /= allQuakes.Count();
-          }
+          // for (int i = 0; i < allQuakes.Count(); i++)
+          // {
+          //   allQuakes[i].Properties.Magnitude += average;
+          //   average /= allQuakes.Count();
+          // }
 
           return View(allQuakes);
         }
