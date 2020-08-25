@@ -8,14 +8,19 @@ namespace QuakeModeler.Models
   public class Quake
   {
     public string Magnitude {get; set;}
-    public Quake(string magnitude)
+    public string QuakeLat { get; set; }
+    public string QuakeLng { get; set; }
+    public Quake(string magnitude, string lat, string lng)
     {
       Magnitude = magnitude;
+      QuakeLat = lat;
+      QuakeLng = lng;
     }
-    public static List<Quake> GetQuakes(string apiKey, string placeName)
-    {      
-      string[] latLng = LatLng.GetLatLng(apiKey,placeName);
-      var apiCallTask = ApiHelper.ApiCallGetEarthquakes(latLng[0], latLng[1]);
+
+    public static List<Quake> GetQuakes(string lat, string lng)
+    {    
+      // string[] latLng = LatLng.GetLatLng(placeName);
+      var apiCallTask = ApiHelper.ApiCallGetEarthquakes(lat, lng);
       var result = apiCallTask.Result;
 
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
@@ -25,7 +30,7 @@ namespace QuakeModeler.Models
 
       foreach(var entry in quakes)
       {
-          listOfQuakes.Add(new Quake(entry["properties"]["mag"].ToString()));
+        listOfQuakes.Add(new Quake(entry["properties"]["mag"].ToString(), entry["geometry"]["coordinates"][1].ToString(), entry["geometry"]["coordinates"][0].ToString()));
       }
 
       return listOfQuakes;

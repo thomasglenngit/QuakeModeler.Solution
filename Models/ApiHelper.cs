@@ -7,10 +7,10 @@ namespace QuakeModeler.Models
 {
   public class ApiHelper
   {
-    public static async Task<string> ApiCallLatLng(string apiKey, string placeName)
+    public static async Task<string> ApiCallLatLng(string placeName)
     {
       RestClient client = new RestClient("https://api.opencagedata.com/geocode/v1/");
-      RestRequest request = new RestRequest($"json?q={placeName}&key={apiKey}", Method.GET);
+      RestRequest request = new RestRequest($"json?q={placeName}&key={EnvironmentVariables.ApiKey}", Method.GET);
       var response = await client.ExecuteTaskAsync(request);
       return response.Content;
     }
