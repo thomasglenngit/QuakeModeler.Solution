@@ -3,7 +3,7 @@
 <h4 align="center"><em>MVC program to query an Earthquake data API and produce aggregate information about earthquakes and their locations.</em></h4>
 
 
-<img src="wwwroot/assets/images/SplashPg.png"          style="float: left; margin-right: 10px;" /><br>
+<img src="QuakeModeler/wwwroot/assets/images/SplashPg.png"          style="float: left; margin-right: 10px;" /><br>
 
 ##### __Created:__ 8/24/2020
 ##### __Last Updated:__ 8/24/2020 
@@ -18,14 +18,14 @@ As a team-week project for Epicodus school we tasked ourselves with creating an 
 * The strength of these earthquakes (over a magnitude of 2.0);
 * The probability that an earthquake would occur in the input region within the next month.
 
-<img src="wwwroot/assets/images/MapResult.png"   style="float: left; margin-right: 10px;" />
+<img src="QuakeModeler/wwwroot/assets/images/MapResult.png"   style="float: left; margin-right: 10px;" />
 <br>
 <br>
 <br>
 
 ## Sitemap:
 
-<img src="wwwroot/assets/images/SiteMap.png"   style="float: left; margin-right: 10px;" /><br>
+<img src="QuakeModeler/wwwroot/assets/images/SiteMap.png"   style="float: left; margin-right: 10px;" /><br>
 
 ## Setup/Installation Requirements
 
