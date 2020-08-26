@@ -49,7 +49,6 @@ html {
   background-size: cover;
   position: relative; */
   color: purple;
-
 }
 
 .hero-text {
@@ -77,7 +76,27 @@ body {
 }
 
 .jumbotron{
-  text-align: center;
-  background-color: white;
-  color: black;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://image.freepik.com/free-vector/city-war-zone-cartoon-vector-illustration_1441-3812.jpg");
+  text-align: left;
+  color: white;
 }
+
+.jumbotron h2 {
+  font-size: 60px;
+}
+
+.jumbotron h4 {
+  left: 45%
+}
+
+img.icon {
+  width: 55px;
+  height: 55px;
+
+}
+/* @media screen and (max-width: 768px) and (min-width: 600px) { */
+img.graph {
+  width: 700px;
+  height: 300px;
+}
+/* } */

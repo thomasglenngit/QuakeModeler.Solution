@@ -27,5 +27,15 @@ namespace QuakeModeler.Models
       var response = await client.ExecuteTaskAsync(request);
       return response.Content;
     }
+
+    public static async Task<string> ApiCallGetMaxMagnitude()
+    {
+      DateTime endDay = DateTime.Now;
+      string end = endDay.ToString("yyyy-MM-dd");      
+      RestClient client = new RestClient("https://earthquake.usgs.gov/fdsnws/event/1/");
+      RestRequest request = new RestRequest($"query?format=geojson&latitude=39.547367&longitude=-105.238256&orderby=magnitude&maxradiuskm=2200&starttime=1950-01-01&endtime={end}&minmag=7", Method.GET);
+      var response = await client.ExecuteTaskAsync(request);
+      return response.Content;
+    }
   }
 }

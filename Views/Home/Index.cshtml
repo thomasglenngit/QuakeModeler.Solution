@@ -2,5 +2,6 @@
   Layout = "_Layout";
 }
 
-<p>@Html.ActionLink("Enter", "Index", "Quakes")</p>
-
+<button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Quakes")';" class="btn btn-outline-dark">Enter</button>
+<button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("History", "Quakes")';" class="btn btn-outline-dark">History</button>
+<button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Resources", "Quakes")';" class="btn btn-outline-dark">Resources</button>

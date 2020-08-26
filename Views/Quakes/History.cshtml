@@ -5,15 +5,6 @@
 @using QuakeModeler.Models;
 @model List<Quake>
 
-@* <div class="hero-image"><img src="wwwroot/assets/images/EQ2.png"><h1>Can you Feel it?</h1></div>
-<div class="hero-text">
-  <h4>"The earth moves under your feet.</h4>
-  <h4>We will tell you when."</h4>
-</div> *@
-@* <h4><img src="../assets/images/EQ2.png">Search Results:</h4> *@
-
-@* <img src='@Url.Content("~/assets/images/EQ1.png")' /> *@
-
 <style>
   #map {
     height: 800px;
@@ -21,35 +12,14 @@
   }
 </style>
 <div class="row">
-  <div class="col-md-4">
-    <p><strong>Location</strong>: @ViewBag.UserData.PlaceName</p>
-    <p><strong>Date Range</strong>: <span id ="startD"></span> - <span id ="endD"></span></p>
-    <script>
-      const endD = new Date()
-      const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(endD)
-      const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(endD)
-      const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(endD)
-      document.getElementById("startD").innerHTML = `${mo}/${da}/${ye-20}`
-      document.getElementById("endD").innerHTML = `${mo}/${da}/${ye}`;
-    </script>
-    <p><strong>Search Radius</strong>: 50km</p>
-    <p><strong>Daily Earthquake Probability</strong>: @ViewBag.Possibility%</p>
-    <p><strong>Average Magnitude</strong>: @ViewBag.AverageMagnitude m</p>
-    <p><strong>Earthquake Count</strong>: @ViewBag.QuakeCount</p>
-    <p><strong>Largest Earthquake</strong>: @ViewBag.MaxMag m</p>
+  <div class="col-md-6">
+    <p><strong>Worst Earthquakes in Continental US since 1950</strong></p>
     <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Quakes")';" class="btn btn-outline-dark">Search</button>
     <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Home")';" class="btn btn-outline-dark">Home</button>
-  </div>
-
-  <div class="col-md-8">
-    <p><img class="graph" src='@Url.Content("https://www.visualcapitalist.com/wp-content/uploads/2020/05/earthquake-magnitude-prev-2.png")'></p>
-    @* <p><img class="graph" src='@Url.Content("https://www.americangeosciences.org/sites/default/files/styles/ci__650_x_430_/public/CI_Map_78_EQprobability_US_170505.jpg?itok=BVu1HOjI")'></p> *@
-    @* <p><img class="graph" src='@Url.Content("http://maps-portland.com/img/1200/portland-oregon-earthquake-risk-map.jpg")'></p> *@
   </div>
 </div>
 
 <hr />
-
 
 <div id="map">
     <script>      
@@ -62,19 +32,11 @@
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           //stand in for user inputted place to center map
-          center: { lat: parseFloat(userPlace.userLat), lng: parseFloat(userPlace.userLng) },
-          zoom: 10,
+          center: { lat: 39.547367, lng: -105.238256 },
+          zoom: 4,
           //custom style
           styles: [{"featureType": "administrative","elementType": "labels.text.fill","stylers": [{"color": "#444444"}]},{"featureType": "administrative.country","elementType": "geometry","stylers": [{"visibility": "off"},{"hue": "#ff0000"},{"saturation": "94"},{"lightness": "88"},{"weight": "3.01"},{"invert_lightness": true}]},{"featureType": "landscape","elementType": "all","stylers": [{"color": "#f2f2f2"}]},{"featureType": "poi","elementType": "all","stylers": [{"visibility": "off"}]},{"featureType": "road","elementType": "all","stylers": [{"saturation": -100},{"lightness": 45}]},{"featureType": "road.highway","elementType": "all","stylers": [{"visibility": "simplified"}]},{"featureType": "road.arterial","elementType": "labels.icon","stylers": [{"visibility": "off"}]},{"featureType": "transit","elementType": "all","stylers": [{"visibility": "off"}]},{"featureType": "water","elementType": "all","stylers": [{"color": "#ffffff"},{"visibility": "on"}]}]
         });
-
-        //creates marker for user inputted location (necessary?)
-        var marker = new google.maps.Marker({  
-            position: { lat: parseFloat(userPlace.userLat), lng: parseFloat(userPlace.userLng) }  
-          });
-        
-        //sets marker for user inputted location
-        marker.setMap(map);
 
         quakeMap.forEach(function(quake) {
 
@@ -139,6 +101,4 @@
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"defer></script>
-  </div>
-
-
+</div>

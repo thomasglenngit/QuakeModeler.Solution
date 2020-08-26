@@ -23,7 +23,6 @@ namespace QuakeModeler.Models
 
     public static List<Quake> GetQuakes(string lat, string lng)
     {    
-      // string[] latLng = LatLng.GetLatLng(placeName);
       var apiCallTask = ApiHelper.ApiCallGetEarthquakes(lat, lng);
       var result = apiCallTask.Result;
 
@@ -44,6 +43,25 @@ namespace QuakeModeler.Models
       return listOfQuakes;
     } 
 
+    public static List<Quake> GetWorstQuakes()
+    {    
+      var apiCallTask = ApiHelper.ApiCallGetMaxMagnitude();
+      var result = apiCallTask.Result;
 
+      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      JObject[] quakes = JsonConvert.DeserializeObject<JObject[]>(jsonResponse["features"].ToString());
+
+      List<Quake> listOfQuakes = new List<Quake>();
+
+      for(int i=0; i < 5; i++)
+      {
+        listOfQuakes.Add(new Quake(Convert.ToDouble(quakes[i]["properties"]["mag"]), 
+                                  quakes[i]["geometry"]["coordinates"][1].ToString(), 
+                                  quakes[i]["geometry"]["coordinates"][0].ToString(),
+                                  quakes[i]["properties"]["place"].ToString(),
+                                  quakes[i]["properties"]["time"].ToString()));
+      }
+      return listOfQuakes;
+    }
   }
 }

@@ -5,11 +5,12 @@
 @model QuakeModeler.Models.Quake;
 @using QuakeModeler.Models;
 
-<h4>Search Quake data in your area:</h4>
+<h4><img class="icon" src='@Url.Content("~/assets/images/EQ3.png")'>Enter your Location:</h4>
 @using(Html.BeginForm())
 {
   <div class="form-group">
     @Html.TextBox("placeName", null, new { @class="form-control" })
   </div>
   <button class="btn btn-secondary" type="submit" class="btn btn-outline-dark">Search</button>
+  <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Home")';" class="btn btn-outline-dark">Home</button>
 }

@@ -38,6 +38,12 @@ namespace QuakeModeler.Controllers
       
       return View(allQuakes);
     } 
+
+    public IActionResult History()
+    {
+      var allQuakes = Quake.GetWorstQuakes();      
+      return View(allQuakes);
+    }
   }
 }
 
