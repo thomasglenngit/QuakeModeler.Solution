@@ -1,80 +1,26 @@
-@*@using QuakeModeler.Models;
-@model List<Quake>*@
-
-<h1>Earthquake:</h1>
-
-<ol>
-@foreach (Quake quake in Model)
-{
-  <li>Magnitude: @quake.Magnitude</li>
-  <li>Lat: @quake.QuakeLat</li>
-  <li>Lng: @quake.QuakeLng</li>
+@{
+  Layout = "_Layout";
 }
-</ol>
 
-@*
-<div id="map"></div>
-    <script type="text/javascript">
-    let quakes = [];
-    @foreach (var item in Model.quake)
-    {
-        quakes.push()
-    }
-    var quakes = @Html.Raw(Json.Serialize(@Model));
-      
-      //stand in for view model
-      const quakeMap = {
-        quake1: {
-          center: { lat: 45.8787, lng: -121.6545 },
-          magnitude: 3,
-          time: 1598373123010
-        },
-        quake2: {
-          center: { lat: 44.7145, lng: -117.3214 },
-          magnitude: 5,
-          time: 1598371790600
-        },
-        quake3: {
-          center: { lat: 44.6543, lng: -118.243 },
-          magnitude: 6,
-          time: 1598371471950
-        },
-        quake4: {
-          center: { lat: 46.7644, lng: -120.4351 },
-          magnitude: 4,
-          time: 1598371049800
-        },
-        quake5: {
-          center: { lat: 46.7644, lng: -121.6751 },
-          magnitude: 3,
-          time: 1598370823720
-        },
-        quake6: {
-          center: { lat: 45.8787, lng: -120.1545 },
-          magnitude: 3,
-          time: 1598370246570
-        },
-        quake7: {
-          center: { lat: 44.7145, lng: -117.9874 },
-          magnitude: 5,
-          time: 1598369251910
-        },
-        quake8: {
-          center: { lat: 44.6543, lng: -119.243 },
-          magnitude: 6,
-          time: 1598367671670
-        },
-        quake9: {
-          center: { lat: 46.7644, lng: -121.551 },
-          magnitude: 4,
-          time: 1598367473120
-        },
-        quake10: {
-          center: { lat: 46.9644, lng: -121.6751 },
-          magnitude: 3,
-          time: 1598367409110
-        }
-      };
+@using QuakeModeler.Models;
+@model List<Quake>
+
+<style>
+  #map {
+    height: 800px;
+    width: 100%;
+  }
+</style>
+
+<p>Daily Earthquake Probability: @ViewBag.Possibility</p>
+<p>Average Magnitude: @ViewBag.AverageMagnitude</p>
+<p>Earthquake Count: @ViewBag.QuakeCount</p>
+<p>Largest Earthquake: @ViewBag.MaxMag</p>
+
+<div id="map">
+    <script>      
+      var quakeMap = @Html.Raw(Json.Serialize(Model));
+      var userPlace = @Html.Raw(Json.Serialize(ViewBag.UserData));
 
       //holds currently opened info popups
       var openInfo = [];
@@ -82,25 +28,25 @@
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           //stand in for user inputted place to center map
-          center: { lat: 45.5051, lng: -122.6750},
-          zoom: 8,
+          center: { lat: parseFloat(userPlace.userLat), lng: parseFloat(userPlace.userLng) },
+          zoom: 12,
           //custom style
           styles: [{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"administrative.country","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"administrative.province","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#e3e3e3"}]},{"featureType":"landscape.natural","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"color":"#cccccc"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"transit.station.airport","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"transit.station.airport","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#FFFFFF"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"off"}]}]
         });
 
         //creates marker for user inputted location (necessary?)
         var marker = new google.maps.Marker({  
-            position: { lat: 45.5051, lng: -122.6750}  
+            position: { lat: parseFloat(userPlace.userLat), lng: parseFloat(userPlace.userLng) }  
           });
         
         //sets marker for user inputted location
         marker.setMap(map);
 
-        for (const quake in Model) {
+        quakeMap.forEach(function(quake) {
 
           const quakeMarker = new google.maps.Marker({
               //Creates little circle marker at epicenter
-              position: { Model[quake].lat, Model[quake].lng },
+              position: { lat: parseFloat(quake.quakeLat), lng: parseFloat(quake.quakeLng) },
               icon: {
                 path: google.maps.SymbolPath.CIRCLE,
                 scale: 3,
@@ -112,11 +58,11 @@
           });
 
           //sets the body of the info window
-          var quakeInfo = `<h3>Earthquake Event</h3>
+          var quakeInfo = `<p>Earthquake Event</p>
             <hr />
-            <h4>Coordinates: ${Model[quake].center.lat}, ${Model[quake].center.lng}</h4>
-            <h4>Date: ${new Date(Model[quake].time)}</h4>
-            <h4>Magnitude: ${Model[quake].magnitude}</h4>`
+            <p>Coordinates: ${quake.quakeLat}, ${quake.quakeLng}</p>
+            <p>Magnitude: ${quake.magnitude}</p>`
+            
 
           //creates the info window
           const infowindow = new google.maps.InfoWindow({
@@ -141,10 +87,10 @@
             fillColor: "#FF0000",
             fillOpacity: 0.35,
             map,
-            center: Model[quake].center,
-            radius: Model[quake].magnitude * 10000
+            center: { lat: parseFloat(quake.quakeLat), lng: parseFloat(quake.quakeLng) },
+            radius: quake.magnitude * 500
           });
-        }
+        });
 
         //closes open info window
         function closeOtherInfo() {
@@ -156,6 +102,7 @@
         }
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0f5hDkfvYLD979JoHFNDIAUyqrU0fk3A&callback=initMap"defer></script>
-</div>
-*@
+    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"defer></script>
+  </div>
+
+
