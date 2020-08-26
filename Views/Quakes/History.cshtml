@@ -11,14 +11,13 @@
     width: 100%;
   }
 </style>
-<div class="row">
-  <div class="col-md-6">
-    <p><strong>Worst Earthquakes in Continental US since 1950</strong></p>
-    <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Quakes")';" class="btn btn-outline-dark">Search</button>
-    <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Home")';" class="btn btn-outline-dark">Home</button>
-  </div>
-</div>
 
+<div class="navigation">
+  <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Home")';" class="btn btn-outline-dark">Home</button>
+  <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Quakes")';" class="btn btn-outline-dark">Search</button>
+  <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Resources", "Quakes")';" class="btn btn-outline-dark">Resources</button><br>
+</div>
+<h4>Worst Earthquakes in Continental US since 1950</h4>
 <hr />
 
 <div id="map">

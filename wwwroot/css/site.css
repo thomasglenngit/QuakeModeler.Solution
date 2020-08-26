@@ -63,6 +63,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  background-color: rgb(233, 224, 195);
 }
 
 .footer {
@@ -86,6 +87,8 @@ body {
 }
 
 .jumbotron h4 {
+  
+  color: White;
   left: 45%
 }
 
@@ -100,3 +103,11 @@ img.graph {
   height: 300px;
 }
 /* } */
+
+.form-group {
+  width: 50%;
+}
+
+.navigation{
+  margin-bottom: 20px;
+}

@@ -10,7 +10,6 @@ namespace QuakeModeler.Controllers
 {
   public class QuakesController : Controller
   {
-    //form for input, no data
     public IActionResult Index()
     {
       return View();
@@ -44,37 +43,10 @@ namespace QuakeModeler.Controllers
       var allQuakes = Quake.GetWorstQuakes();      
       return View(allQuakes);
     }
+
+    public IActionResult Resources()
+    {      
+      return View();
+    }
   }
 }
-
-          // //Find Mode
-          // int mode = allQuakes.Properties.Magnitude.GroupBy(magnitude => magnitude)
-          //   .OrderByDescending(magnitude => magnitude.Count())
-          //   .First()
-          //   .Key;
-
-
-
-//for (int i = 0; i < allDreams.Count; i++)
-          // {
-          //   //search for string1
-          //   if (string1 != null && allQuakes[i].Field.ToLower().Contains(string1.ToLower()))
-          //   {
-          //     searchObject.Add(allQuakes[i]);
-          //   }
-          //   //search for string2
-          //   if (string2 != null && allQuakes[i].Field.ToLower().Contains(string2.ToLower()))
-          //   {
-          //     searchObject.Add(allQuakes[i]);
-          //   }
-          //   //search for number1
-          //   if (number1 != null && allQuakes[i].Field == number1)
-          //   {
-          //     searchObject.Add(allQuakes[i]);
-          //   }
-          //   //search for number2
-          //   if (number2 != null && allQuakes[i].Field == number2)
-          //   {
-          //     searchObject.Add(allQuakes[i]);
-          //   }
-          // }

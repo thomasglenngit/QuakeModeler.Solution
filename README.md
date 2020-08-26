@@ -3,6 +3,8 @@
 <h4 align="center"><em>MVC program to query an Earthquake data API and produce aggregate / predictive information about earthquakes in their location.</em></h4>
 
 
+<img src="wwwroot/assets/images/SplashPg.png"          style="float: left; margin-right: 10px;" />
+
 ##### __Created:__ 8/24/2020
 ##### __Last Updated:__ 8/24/2020 
 ##### By _**Tyson Lackey, Thomas Glenn, JohnNils Olson, Evgeniya Chernaya, Frederick Ernest**_  
@@ -14,7 +16,7 @@ As a team-week project for Epicodus school we tasked ourselves with creating an 
 * An interactive heat-map of earthquakes for the input region for the twenty years previous to date of inquiry;
 * A list of these earthquakes with their respective latitudes and longitudes;
 * The strength of these earthquakes (over a magnitude of 2.0);
-* The probability that an earthquake would occur in the input region within the next month. 
+* The probability that an earthquake would occur in the input region within the next month.
 
 
 ## Setup/Installation Requirements
