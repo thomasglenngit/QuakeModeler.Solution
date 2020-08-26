@@ -2,5 +2,16 @@
   Layout = "_Layout";
 }
 
-<h1>Can you Feel it?</h1>
-<p>@Html.ActionLink("Enter", "Index", "Quakes")</p>
+<div class="navigation">
+  <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Quakes")';" class="btn btn-outline-dark">Enter</button>
+  <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("History", "Quakes")';" class="btn btn-outline-dark">History</button>
+  <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Resources", "Quakes")';" class="btn btn-outline-dark">Resources</button>
+</div>
+
+<p>Welcome!</p>
+</p>Beyond this page you'll be able to find the relevant
+seismological event information for a given location, including the daily earthquake probability,
+average magnitude, and largest recording event.</p>
+<p>This tool utlitizes information pulled from the USGS,
+and is not intended to be taken as serious advice for responding to natural disasters.</p>
+

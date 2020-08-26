@@ -5,16 +5,18 @@
 @model QuakeModeler.Models.Quake;
 @using QuakeModeler.Models;
 
-<h4>Search Quake data in your area:</h4>
-@*@using (Html.BeginForm())
-{
-  @Html.LabelFor(model => model.PlaceName)
-  @Html.TextBoxFor(model => model.PlaceName, new {@class = "form-control"})
-  <input type="submit" value="Search" />
-}*@
+<div class="navigation">
+  <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Home")';" class="btn btn-outline-dark">Home</button>
+  <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("History", "Quakes")';" class="btn btn-outline-dark">History</button>
+  <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Resources", "Quakes")';" class="btn btn-outline-dark">Resources</button>
+</div>
+<hr />
 
+<h4><img class="icon" src='@Url.Content("~/assets/images/EQRunningMan.png")'>Enter your Location:</h4>
 @using(Html.BeginForm())
 {
-  <p>@Html.TextBox("placeName")</p>
-  <button class="btn" type="submit">Search</button>
+  <div class="form-group">
+    @Html.TextBox("placeName", null, new { @class="form-control" })
+  </div>
+  <button class="btn btn-secondary" type="submit" class="btn btn-outline-dark">Search</button>
 }
