@@ -20,10 +20,10 @@ namespace QuakeModeler.Models
     {
       DateTime endDay = DateTime.Now;
       string end = endDay.ToString("yyyy-MM-dd");
-      DateTime startDay = endDay.AddYears(-10);
+      DateTime startDay = endDay.AddYears(-20);
       string start = startDay.ToString("yyyy-MM-dd");
       RestClient client = new RestClient("https://earthquake.usgs.gov/fdsnws/event/1/");
-      RestRequest request = new RestRequest($"query?format=geojson&latitude={lat}&longitude={lng}&maxradiuskm=10&starttime={start}&endtime={end}&minmag=1.50&orderby%3Dmagnitude", Method.GET);
+      RestRequest request = new RestRequest($"query?format=geojson&latitude={lat}&longitude={lng}&maxradiuskm=50&starttime={start}&endtime={end}&minmag=2.50&orderby%3Dmagnitude", Method.GET);
       var response = await client.ExecuteTaskAsync(request);
       return response.Content;
     }
