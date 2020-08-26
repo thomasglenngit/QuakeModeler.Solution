@@ -19,6 +19,10 @@ namespace QuakeModeler.Controllers
     [HttpPost]
     public IActionResult Index(string placeName)
     {
+      if(string.IsNullOrEmpty(placeName))
+      {
+        return View();
+      }
       LatLng latLng = LatLng.GetLatLng(placeName);
       return RedirectToAction("Details", latLng);
     }

@@ -41,10 +41,30 @@ html {
   min-height: 100%;
 }
 
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.freepik.com/free-vector/city-war-zone-cartoon-vector-illustration_5901376.htm#page=1&query=earthquake&position=4");
+  height: 250px;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+}
+
+.hero-text {
+  text-align: left;
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -50%);  
+  color: White;
+}
+
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -53,4 +73,10 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
+}
+
+.jumbotron{
+  text-align: center;
+  background-color: white;
+  color: black;
 }

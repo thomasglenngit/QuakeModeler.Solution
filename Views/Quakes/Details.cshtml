@@ -5,6 +5,12 @@
 @using QuakeModeler.Models;
 @model List<Quake>
 
+<div class="hero-image"><img src="wwwroot/assets/images/EQ2.png"><h1>Can you Feel it?</h1></div>
+<div class="hero-text">
+  <h4>"The earth moves under your feet.</h4>
+  <h4>We will tell you when."</h4>
+</div>
+
 <style>
   #map {
     height: 800px;
@@ -12,10 +18,14 @@
   }
 </style>
 
-<p>Daily Earthquake Probability: @ViewBag.Possibility</p>
-<p>Average Magnitude: @ViewBag.AverageMagnitude</p>
-<p>Earthquake Count: @ViewBag.QuakeCount</p>
-<p>Largest Earthquake: @ViewBag.MaxMag magnitude</p>
+<p><strong>Location</strong>: @ViewBag.UserData.PlaceName</p>
+<p><strong>Date</strong>:<span id ="date"></span></p>
+<script>document.getElementById("date").innerHTML = Date();</script>
+<p><strong>Search Radius</strong>: 50km</p>
+<p><strong>Daily Earthquake Probability</strong>: @ViewBag.Possibility%</p>
+<p><strong>Average Magnitude</strong>: @ViewBag.AverageMagnitude m</p>
+<p><strong>Earthquake Count</strong>: @ViewBag.QuakeCount</p>
+<p><strong>Largest Earthquake</strong>: @ViewBag.MaxMag m</p>
 
 <div id="map">
     <script>      

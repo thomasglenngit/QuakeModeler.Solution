@@ -5,15 +5,6 @@ namespace QuakeModeler.Models
 {
   public class Metrics
   {
-    //average number of quakes in a month based on ten years : quakes.Count / 120
-    // 1 / (quakes.Count/120) * 100 = 100 / (quakes.Count/120)
-    // possibility to have earthquake in a month: number of EQ in month / 30 * 100
-
-    // earthquakes per month (x) = 10
-    // Quakes.Count = 1200
-
-    // 1/(1200/120)*100 = 20
-    // 12000/1200 = 20
     public static double PossibilityOfQuake(List<Quake> quakes)
     {
       double possibility = 0;
@@ -26,16 +17,16 @@ namespace QuakeModeler.Models
 
     public static double StrengthOfQuake(List<Quake> quakes) 
     {
-        if(quakes.Count == 0)
-        {
-          return (double)0;
-        }
-        double sum = 0;      
-        foreach (var item in quakes)
-        {
-            sum += Convert.ToDouble(item.Magnitude);
-        }
-        return Math.Round(sum / quakes.Count, 2);
+      if(quakes.Count == 0)
+      {
+        return (double)0;
+      }
+      double sum = 0;      
+      foreach (var item in quakes)
+      {
+          sum += Convert.ToDouble(item.Magnitude);
+      }
+      return Math.Round(sum / quakes.Count, 2);
     }
 
     public static double MaxMagnitude(List<Quake> quakes)

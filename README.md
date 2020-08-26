@@ -34,7 +34,6 @@ As a team-week project for Epicodus school we tasked ourselves with creating an 
 
 * n/a
 
-
 ## Support and contact details
 
 * Tyson Lackey <lackeyt90@gmail.com>
