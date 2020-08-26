@@ -34,10 +34,10 @@ namespace QuakeModeler.Models
       foreach(var entry in quakes)
       {
         listOfQuakes.Add(new Quake(Convert.ToDouble(entry["properties"]["mag"]), 
-                                  entry["geometry"]["coordinates"][1].ToString(), 
-                                  entry["geometry"]["coordinates"][0].ToString(),
-                                  entry["properties"]["place"].ToString(),
-                                  entry["properties"]["time"].ToString()));
+              entry["geometry"]["coordinates"][1].ToString(), 
+              entry["geometry"]["coordinates"][0].ToString(),
+              entry["properties"]["place"].ToString(),
+              entry["properties"]["time"].ToString()));
       }
 
       return listOfQuakes;
@@ -56,10 +56,10 @@ namespace QuakeModeler.Models
       for(int i=0; i < 5; i++)
       {
         listOfQuakes.Add(new Quake(Convert.ToDouble(quakes[i]["properties"]["mag"]), 
-                                  quakes[i]["geometry"]["coordinates"][1].ToString(), 
-                                  quakes[i]["geometry"]["coordinates"][0].ToString(),
-                                  quakes[i]["properties"]["place"].ToString(),
-                                  quakes[i]["properties"]["time"].ToString()));
+              quakes[i]["geometry"]["coordinates"][1].ToString(), 
+              quakes[i]["geometry"]["coordinates"][0].ToString(),
+              quakes[i]["properties"]["place"].ToString(),
+              quakes[i]["properties"]["time"].ToString()));
       }
       return listOfQuakes;
     }

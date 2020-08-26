@@ -20,12 +20,7 @@ namespace QuakeModeler.Models
       UserLat = lat;
       UserLng = lng;
     }
-//1. Set user location: string[] location = LatLng.GetLatLng(userInputPlaceName)
-//                      string userLat = location[0];
-//                      string userLng = location[1];
 
-// LatLng userData = GetLatLng(userPlaceName)
-// getQuakes(userData.UserLat, userData.UserLng)
     public static LatLng GetLatLng(string placeName)
     {      
       var apiCallTask = ApiHelper.ApiCallLatLng(placeName);

@@ -15,7 +15,6 @@ namespace QuakeModeler.Models
       return response.Content;
     }
 
-//https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&latitude=47.6038321&longitude=-122.330062&maxradiuskm=20&starttime=2019-07-01&endtime=2019-09-01
     public static async Task<string> ApiCallGetEarthquakes(string lat, string lng)
     {
       DateTime endDay = DateTime.Now;
