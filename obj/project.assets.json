@@ -12097,23 +12097,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lacke\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/Users/thomasglenn/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lacke\\Desktop\\Epicodus\\C#\\QuakeModeler.Solution\\QuakeModeler.csproj",
+      "projectUniqueName": "/Users/thomasglenn/Desktop/Csharp/QuakeModeler.Solution/QuakeModeler.csproj",
       "projectName": "QuakeModeler",
-      "projectPath": "C:\\Users\\lacke\\Desktop\\Epicodus\\C#\\QuakeModeler.Solution\\QuakeModeler.csproj",
-      "packagesPath": "C:\\Users\\lacke\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lacke\\Desktop\\Epicodus\\C#\\QuakeModeler.Solution\\obj\\",
+      "projectPath": "/Users/thomasglenn/Desktop/Csharp/QuakeModeler.Solution/QuakeModeler.csproj",
+      "packagesPath": "/Users/thomasglenn/.nuget/packages/",
+      "outputPath": "/Users/thomasglenn/Desktop/Csharp/QuakeModeler.Solution/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\lacke\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/thomasglenn/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"
