@@ -1,0 +1,136 @@
+@{
+  Layout = "_Layout";
+}
+
+@using QuakeModeler.Models;
+@model List<Quake>
+
+<style>
+  #map {
+    height: 800px;
+    width: 100%;
+  }
+</style>
+
+<div class="row">
+  <div class="col-md-4">
+    <p><strong>Location</strong>: @ViewBag.UserData.PlaceName</p>
+    <p><strong>Date Range</strong>: <span id ="startD"></span> - <span id ="endD"></span></p>
+    <script>
+      const endD = new Date()
+      const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(endD)
+      const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(endD)
+      const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(endD)
+      document.getElementById("startD").innerHTML = `${mo}/${da}/${ye-20}`
+      document.getElementById("endD").innerHTML = `${mo}/${da}/${ye}`;
+    </script>
+    <p><strong>Search Radius</strong>: 50km</p>
+    <p><strong>Daily Earthquake Probability</strong>: @ViewBag.Possibility%</p>
+    <p><strong>Average Magnitude</strong>: @ViewBag.AverageMagnitude m</p>
+    <p><strong>Earthquake Count</strong>: @ViewBag.QuakeCount</p>
+    <p><strong>Largest Earthquake</strong>: @ViewBag.MaxMag m</p>
+    <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Quakes")';" class="btn btn-outline-dark">Search</button>
+    <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Home")';" class="btn btn-outline-dark">Home</button>
+  </div>
+
+  <div class="col-md-8">
+    <p><img class="graph" src='@Url.Content("https://www.visualcapitalist.com/wp-content/uploads/2020/05/earthquake-magnitude-prev-2.png")'></p>
+    @* <p><img class="graph" src='@Url.Content("https://www.americangeosciences.org/sites/default/files/styles/ci__650_x_430_/public/CI_Map_78_EQprobability_US_170505.jpg?itok=BVu1HOjI")'></p> *@
+    @* <p><img class="graph" src='@Url.Content("http://maps-portland.com/img/1200/portland-oregon-earthquake-risk-map.jpg")'></p> *@
+  </div>
+</div>
+
+<hr />
+
+
+<div id="map">
+    <script>      
+      var quakeMap = @Html.Raw(Json.Serialize(Model));
+      var userPlace = @Html.Raw(Json.Serialize(ViewBag.UserData));
+
+      //holds currently opened info popups
+      var openInfo = [];
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          //stand in for user inputted place to center map
+          center: { lat: parseFloat(userPlace.userLat), lng: parseFloat(userPlace.userLng) },
+          zoom: 10,
+          //custom style
+          styles: [{"featureType": "administrative","elementType": "labels.text.fill","stylers": [{"color": "#444444"}]},{"featureType": "administrative.country","elementType": "geometry","stylers": [{"visibility": "off"},{"hue": "#ff0000"},{"saturation": "94"},{"lightness": "88"},{"weight": "3.01"},{"invert_lightness": true}]},{"featureType": "landscape","elementType": "all","stylers": [{"color": "#f2f2f2"}]},{"featureType": "poi","elementType": "all","stylers": [{"visibility": "off"}]},{"featureType": "road","elementType": "all","stylers": [{"saturation": -100},{"lightness": 45}]},{"featureType": "road.highway","elementType": "all","stylers": [{"visibility": "simplified"}]},{"featureType": "road.arterial","elementType": "labels.icon","stylers": [{"visibility": "off"}]},{"featureType": "transit","elementType": "all","stylers": [{"visibility": "off"}]},{"featureType": "water","elementType": "all","stylers": [{"color": "#ffffff"},{"visibility": "on"}]}]
+        });
+
+        //creates marker for user inputted location (necessary?)
+        var marker = new google.maps.Marker({  
+            position: { lat: parseFloat(userPlace.userLat), lng: parseFloat(userPlace.userLng) }  
+          });
+        
+        //sets marker for user inputted location
+        marker.setMap(map);
+
+        quakeMap.forEach(function(quake) {
+
+          const quakeMarker = new google.maps.Marker({
+              //Creates little circle marker at epicenter
+              position: { lat: parseFloat(quake.quakeLat), lng: parseFloat(quake.quakeLng) },
+              icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 3,
+                strokeWeight: 1,
+                strokeColor: '#FFFFFF',
+                fillColor: '#FFFFFF',
+                fillOpacity: 1
+              },
+          });
+
+          //sets the body of the info window
+          var quakeInfo = `<p><strong>Earthquake Event</strong></p>
+            <p>${new Date(parseInt(quake.date))}</p>
+            <p>${quake.place}</p>
+            <hr />
+            <p>Coordinates: ${quake.quakeLat}, ${quake.quakeLng}</p>
+            <p>Magnitude: ${quake.magnitude}</p>`
+            
+
+          //creates the info window
+          const infowindow = new google.maps.InfoWindow({
+              content: quakeInfo,
+          });
+
+          //makes markers clickable, closes open info window, opens info window, stores currently open window in openInfo array
+          quakeMarker.addListener("click", () => {
+              closeOtherInfo();
+              infowindow.open(map, quakeMarker);
+              openInfo[0] = infowindow;
+          });
+
+          //sets marker on the map
+          quakeMarker.setMap(map);
+
+          //generates magnitude circle
+          const quakeCircle = new google.maps.Circle({
+            strokeColor: "#FF0000",
+            strokeOpacity: 0,
+            strokeWeight: 0,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+            map,
+            center: { lat: parseFloat(quake.quakeLat), lng: parseFloat(quake.quakeLng) },
+            radius: (Math.exp(quake.magnitude/1.01-0.13))*100
+          });
+        });
+
+        //closes open info window
+        function closeOtherInfo() {
+          if (openInfo.length > 0) {
+            openInfo[0].set("marker", null);
+            openInfo[0].close();
+            openInfo.length = 0;
+          }
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"defer></script>
+  </div>
+
+

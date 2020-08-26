@@ -1,0 +1,113 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.hero-image {
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.freepik.com/free-vector/city-war-zone-cartoon-vector-illustration_5901376.htm#page=1&query=earthquake&position=4");
+  height: 250px;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative; */
+  color: purple;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -50%);  
+  color: White;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+  background-color: rgb(233, 224, 195);
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+.jumbotron{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://image.freepik.com/free-vector/city-war-zone-cartoon-vector-illustration_1441-3812.jpg");
+  text-align: left;
+  color: white;
+}
+
+.jumbotron h2 {
+  font-size: 60px;
+}
+
+.jumbotron h4 {
+  
+  color: White;
+  left: 45%
+}
+
+img.icon {
+  width: 55px;
+  height: 55px;
+
+}
+/* @media screen and (max-width: 768px) and (min-width: 600px) { */
+img.graph {
+  width: 700px;
+  height: 300px;
+}
+/* } */
+
+.form-group {
+  width: 50%;
+}
+
+.navigation{
+  margin-bottom: 20px;
+}
