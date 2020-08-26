@@ -15,7 +15,7 @@
 <p>Daily Earthquake Probability: @ViewBag.Possibility</p>
 <p>Average Magnitude: @ViewBag.AverageMagnitude</p>
 <p>Earthquake Count: @ViewBag.QuakeCount</p>
-<p>Largest Earthquake: @ViewBag.MaxMag</p>
+<p>Largest Earthquake: @ViewBag.MaxMag magnitude</p>
 
 <div id="map">
     <script>      
@@ -29,7 +29,7 @@
         var map = new google.maps.Map(document.getElementById('map'), {
           //stand in for user inputted place to center map
           center: { lat: parseFloat(userPlace.userLat), lng: parseFloat(userPlace.userLng) },
-          zoom: 12,
+          zoom: 10,
           //custom style
           styles: [{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"administrative.country","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"administrative.province","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#e3e3e3"}]},{"featureType":"landscape.natural","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"color":"#cccccc"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"transit.station.airport","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"transit.station.airport","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#FFFFFF"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"off"}]}]
         });
@@ -51,14 +51,16 @@
                 path: google.maps.SymbolPath.CIRCLE,
                 scale: 3,
                 strokeWeight: 1,
-                strokeColor: '#FF0000',
-                fillColor: '#FF0000',
+                strokeColor: '#FFFFFF',
+                fillColor: '#FFFFFF',
                 fillOpacity: 1
               },
           });
 
           //sets the body of the info window
           var quakeInfo = `<p>Earthquake Event</p>
+            <p>${new Date(parseInt(quake.date))}</p>
+            <p>${quake.place}</p>
             <hr />
             <p>Coordinates: ${quake.quakeLat}, ${quake.quakeLng}</p>
             <p>Magnitude: ${quake.magnitude}</p>`
@@ -88,7 +90,7 @@
             fillOpacity: 0.35,
             map,
             center: { lat: parseFloat(quake.quakeLat), lng: parseFloat(quake.quakeLng) },
-            radius: quake.magnitude * 500
+            radius: (Math.exp(quake.magnitude/1.01-0.13))*100
           });
         });
 

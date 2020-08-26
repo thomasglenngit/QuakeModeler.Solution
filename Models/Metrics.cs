@@ -19,9 +19,9 @@ namespace QuakeModeler.Models
       double possibility = 0;
       if(quakes.Count != 0)
       {
-        possibility = quakes.Count * 10 / 365;
+        possibility = quakes.Count * (double)10 / (double)365;
       }
-      return possibility;
+      return Math.Round(possibility, 3);
     }
 
     public static double StrengthOfQuake(List<Quake> quakes) 
@@ -35,7 +35,7 @@ namespace QuakeModeler.Models
         {
             sum += Convert.ToDouble(item.Magnitude);
         }
-        return sum / quakes.Count;
+        return Math.Round(sum / quakes.Count, 2);
     }
 
     public static double MaxMagnitude(List<Quake> quakes)
