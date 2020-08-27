@@ -14,6 +14,10 @@
 
 <div class="row">
   <div class="col-md-4">
+    <div class="navigation">
+      <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Home")';" class="btn btn-outline-dark">Home</button>
+      <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Quakes")';" class="btn btn-outline-dark">Search</button>
+    </div>
     <p><strong>Location</strong>: @ViewBag.UserData.PlaceName</p>
     <p><strong>Date Range</strong>: <span id ="startD"></span> - <span id ="endD"></span></p>
     <script>
@@ -29,12 +33,13 @@
     <p><strong>Average Magnitude</strong>: @ViewBag.AverageMagnitude m</p>
     <p><strong>Earthquake Count</strong>: @ViewBag.QuakeCount</p>
     <p><strong>Largest Earthquake</strong>: @ViewBag.MaxMag m</p>
-    <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Quakes")';" class="btn btn-outline-dark">Search</button>
-    <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Home")';" class="btn btn-outline-dark">Home</button>
   </div>
 
   <div class="col-md-8">
-    <p><img class="graph" src='@Url.Content("https://www.visualcapitalist.com/wp-content/uploads/2020/05/earthquake-magnitude-prev-2.png")'></p>
+    <div id="magnitude" style="width:100%; height:250px;"></div><br>
+    <div id="frequency" style="width:100%; height:250px;"></div>
+    
+    @* <p><img class="graph" src='@Url.Content("https://www.visualcapitalist.com/wp-content/uploads/2020/05/earthquake-magnitude-prev-2.png")'></p> *@
     @* <p><img class="graph" src='@Url.Content("https://www.americangeosciences.org/sites/default/files/styles/ci__650_x_430_/public/CI_Map_78_EQprobability_US_170505.jpg?itok=BVu1HOjI")'></p> *@
     @* <p><img class="graph" src='@Url.Content("http://maps-portland.com/img/1200/portland-oregon-earthquake-risk-map.jpg")'></p> *@
   </div>
@@ -42,8 +47,6 @@
 
 <hr />
 
-<div id="magnitude" style="width:100%; height:400px;"></div>
-<div id="frequency" style="width:100%; height:400px;"></div>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
         var quakeMap = @Html.Raw(Json.Serialize(Model));
@@ -55,6 +58,7 @@
         var lessThan7 = 0;
         var lessThan8 = 0;
         var lessThan9 = 0;
+        var lessThan10 = 0;
 
         quakeMap.forEach(function(quake) {
             if (quake.magnitude < 3 && quake.magnitude >= 2) {
@@ -71,6 +75,8 @@
               lessThan8 += 1;
             } else if (quake.magnitude < 9 && quake.magnitude >= 8) {
               lessThan9 += 1;
+            } else if (quake.magnitude < 10 && quake.magnitude >= 9) {
+              lessThan1 += 1;
             }
         });
 
@@ -79,6 +85,7 @@
               enabled: false
             },
             chart: {
+                  backgroundColor: '#dadad8',
                   type: 'column'
             },
             title: {
@@ -97,7 +104,7 @@
             },
             series: [{
               name: '',
-              data: [lessThan3, lessThan4, lessThan5, lessThan6, lessThan7, lessThan8, lessThan9]
+              data: [lessThan3, lessThan4, lessThan5, lessThan6, lessThan7, lessThan8, lessThan9, lessThan10]
             }]
         });
       });
@@ -130,9 +137,7 @@
 
         quakeMap.forEach(function(quake) {
             date = new Date(parseInt(quake.date));
-            console.log(date);
             year = date.getYear() + 1900;
-            console.log(year);
             if (year === 2000) {
               year1 += 1;
             } else if (year === 2001) {
@@ -184,7 +189,9 @@
               enabled: false
             },
             chart: {
+                  backgroundColor: '#dadad8',
                   type: 'line'
+
             },
             title: {
                   text: 'Earthquake Frequency'
@@ -219,7 +226,7 @@
 
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          //stand in for user inputted place to center map
+          //user inputted place to center map
           center: { lat: parseFloat(userPlace.userLat), lng: parseFloat(userPlace.userLng) },
           zoom: 10,
           //custom style

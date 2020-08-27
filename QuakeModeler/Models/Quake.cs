@@ -53,7 +53,7 @@ namespace QuakeModeler.Models
 
       List<Quake> listOfQuakes = new List<Quake>();
 
-      for(int i=0; i < 5; i++)
+      for(int i=0; i < 7; i++)
       {
         listOfQuakes.Add(new Quake(Convert.ToDouble(quakes[i]["properties"]["mag"]), 
               quakes[i]["geometry"]["coordinates"][1].ToString(), 

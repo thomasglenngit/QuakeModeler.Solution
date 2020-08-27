@@ -10,7 +10,7 @@ namespace QuakeModeler.Models
       double possibility = 0;
       if(quakes.Count != 0)
       {
-        possibility = quakes.Count * (double)10 / (double)365;
+        possibility = quakes.Count * (double)10 / ((double)365*2);
       }
       return Math.Round(possibility, 3);
     }
