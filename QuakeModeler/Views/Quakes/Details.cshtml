@@ -14,6 +14,10 @@
 
 <div class="row">
   <div class="col-md-4">
+    <div class="navigation">
+      <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Home")';" class="btn btn-outline-dark">Home</button>
+      <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Quakes")';" class="btn btn-outline-dark">Search</button>
+    </div>
     <p><strong>Location</strong>: @ViewBag.UserData.PlaceName</p>
     <p><strong>Date Range</strong>: <span id ="startD"></span> - <span id ="endD"></span></p>
     <script>
@@ -29,19 +33,184 @@
     <p><strong>Average Magnitude</strong>: @ViewBag.AverageMagnitude m</p>
     <p><strong>Earthquake Count</strong>: @ViewBag.QuakeCount</p>
     <p><strong>Largest Earthquake</strong>: @ViewBag.MaxMag m</p>
-    <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Quakes")';" class="btn btn-outline-dark">Search</button>
-    <button class="btn btn-secondary" type="button" onclick="location.href='@Url.Action("Index", "Home")';" class="btn btn-outline-dark">Home</button>
   </div>
 
   <div class="col-md-8">
-    <p><img class="graph" src='@Url.Content("https://www.visualcapitalist.com/wp-content/uploads/2020/05/earthquake-magnitude-prev-2.png")'></p>
-    @* <p><img class="graph" src='@Url.Content("https://www.americangeosciences.org/sites/default/files/styles/ci__650_x_430_/public/CI_Map_78_EQprobability_US_170505.jpg?itok=BVu1HOjI")'></p> *@
-    @* <p><img class="graph" src='@Url.Content("http://maps-portland.com/img/1200/portland-oregon-earthquake-risk-map.jpg")'></p> *@
+    <div id="magnitude" style="width:100%; height:250px;"></div><br>
+    <div id="frequency" style="width:100%; height:250px;"></div>
   </div>
 </div>
 
 <hr />
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+        var quakeMap = @Html.Raw(Json.Serialize(Model));
+        
+        var lessThan3 = 0;
+        var lessThan4 = 0;
+        var lessThan5 = 0;
+        var lessThan6 = 0;
+        var lessThan7 = 0;
+        var lessThan8 = 0;
+        var lessThan9 = 0;
+        var lessThan10 = 0;
+
+        quakeMap.forEach(function(quake) {
+            if (quake.magnitude < 3 && quake.magnitude >= 2) {
+              lessThan3 += 1;
+            } else if (quake.magnitude < 4 && quake.magnitude >= 3) {
+              lessThan4 += 1;
+            } else if (quake.magnitude < 5 && quake.magnitude >= 4) {
+              lessThan5 += 1;
+            } else if (quake.magnitude < 6 && quake.magnitude >= 5) {
+              lessThan6 += 1;
+            } else if (quake.magnitude < 7 && quake.magnitude >= 6) {
+              lessThan7 += 1;
+            } else if (quake.magnitude < 8 && quake.magnitude >= 7) {
+              lessThan8 += 1;
+            } else if (quake.magnitude < 9 && quake.magnitude >= 8) {
+              lessThan9 += 1;
+            } else if (quake.magnitude < 10 && quake.magnitude >= 9) {
+              lessThan1 += 1;
+            }
+        });
+
+        var magChart = Highcharts.chart('magnitude', {
+            legend: {
+              enabled: false
+            },
+            chart: {
+                  backgroundColor: '#dadad8',
+                  type: 'column'
+            },
+            title: {
+                  text: 'Earthquakes by Magnitude'
+            },
+            xAxis: {
+                  title: {
+                    text: 'Magnitude'
+                  },
+                  categories: ['2', '3', '4', '5', '6', '7', '8', '9']
+            },
+            yAxis: {
+                  title: {
+                    text: 'Number of Earthquakes'
+              }
+            },
+            series: [{
+              name: '',
+              data: [lessThan3, lessThan4, lessThan5, lessThan6, lessThan7, lessThan8, lessThan9, lessThan10]
+            }]
+        });
+      });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+        var quakeMap = @Html.Raw(Json.Serialize(Model));
+        
+        var year1 = 0;
+        var year2 = 0;
+        var year3 = 0;
+        var year4 = 0;
+        var year5 = 0;
+        var year6 = 0;
+        var year7 = 0;
+        var year8 = 0;
+        var year9 = 0;
+        var year10 = 0;
+        var year11 = 0;
+        var year12 = 0;
+        var year13 = 0;
+        var year14 = 0;
+        var year15 = 0;
+        var year16 = 0;
+        var year17 = 0;
+        var year18 = 0;
+        var year19 = 0;
+        var year20 = 0;
+        var year21 = 0;
+
+        quakeMap.forEach(function(quake) {
+            date = new Date(parseInt(quake.date));
+            year = date.getYear() + 1900;
+            if (year === 2000) {
+              year1 += 1;
+            } else if (year === 2001) {
+              year2 += 1;
+            } else if (year === 2002) {
+              year3 += 1;
+            } else if (year === 2003) {
+              year4 += 1;
+            } else if (year === 2004) {
+              year5 += 1;
+            } else if (year === 2005) {
+              year6 += 1;
+            } else if (year === 2006) {
+              year7 += 1;
+            } else if (year === 2007) {
+              year8 += 1;
+            } else if (year === 2008) {
+              year9 += 1;
+            } else if (year === 2009) {
+              year10 += 1;
+            } else if (year === 2010) {
+              year11 += 1;
+            } else if (year === 2011) {
+              year12 += 1;
+            } else if (year === 2012) {
+              year13 += 1;
+            } else if (year === 2013) {
+              year14 += 1;
+            } else if (year === 2014) {
+              year15 += 1;
+            } else if (year === 2015) {
+              year16 += 1;
+            } else if (year === 2016) {
+              year17 += 1;
+            } else if (year === 2017) {
+              year18 += 1;
+            } else if (year === 2018) {
+              year19 += 1;
+            } else if (year === 2019) {
+              year20 += 1;
+            } else if (year === 2020) {
+              year21 += 1;
+            }
+
+        });
+
+        var freqChart = Highcharts.chart('frequency', {
+            legend: {
+              enabled: false
+            },
+            chart: {
+                  backgroundColor: '#dadad8',
+                  type: 'line'
+
+            },
+            title: {
+                  text: 'Earthquake Frequency'
+            },
+            xAxis: {
+                  title: {
+                    text: 'Year'
+                  },
+                  categories: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020' ]
+            },
+            yAxis: {
+                  title: {
+                    text: 'Number of Earthquakes'
+              }
+            },
+            series: [{
+              name: '',
+              data: [year1, year2, year3, year4, year5, year6, year7, year8, year9, year10, year11, year12, year13, year14, year15, year16, year17, year18, year19, year20, year21]
+            }]
+        });
+      });
+</script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
 
 <div id="map">
     <script>      
@@ -53,7 +222,7 @@
 
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          //stand in for user inputted place to center map
+          //user inputted place to center map
           center: { lat: parseFloat(userPlace.userLat), lng: parseFloat(userPlace.userLng) },
           zoom: 10,
           //custom style
