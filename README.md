@@ -16,7 +16,11 @@ As a team-week project for Epicodus school we tasked ourselves with creating an 
 * An interactive heat-map of earthquakes for the input region for the twenty years previous to date of inquiry;
 * A list of these earthquakes with their respective latitudes and longitudes;
 * The strength of these earthquakes (over a magnitude of 2.0);
-* The probability that an earthquake would occur in the input region within the next month.
+* The probability that an earthquake would occur in the input region today.
+    - probability = Total Earthquakes / 365 * 20 (20 year search range, average earthquakes per day)
+* The average earthquake magnitude. 
+    - Avg Magnitude = Sum of all quake magnitudes / total earthquakes
+* Largest earthquake (Max magnitude in search range)
 
 <img src="QuakeModeler/wwwroot/assets/images/MapResult.png"   style="float: left; margin-right: 10px;" />
 <br>
