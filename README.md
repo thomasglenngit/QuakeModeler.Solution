@@ -24,8 +24,6 @@ As a team-week project for Epicodus school we tasked ourselves with creating an 
 
 <img src="QuakeModeler/wwwroot/assets/images/MapResult.png"   style="float: left; margin-right: 10px;" />
 <br>
-<br>
-<br>
 
 ## Sitemap:
 
